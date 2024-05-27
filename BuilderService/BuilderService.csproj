@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BaseInvoice.docx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BaseInvoice.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.13.1" />
+    <PackageReference Include="Dapr.Workflow" Version="1.13.1" />
+    <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="25.2.5" />
+    <PackageReference Include="Syncfusion.DocIORenderer.Net.Core" Version="25.2.5" />
+    <PackageReference Include="Syncfusion.Licensing" Version="25.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Invoicer.ServiceDefaults\Invoicer.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+</Project>

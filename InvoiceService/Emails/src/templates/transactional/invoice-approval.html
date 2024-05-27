@@ -1,0 +1,50 @@
+---
+title: "Invoice Approval Needed"
+bodyClass: bg-slate-50
+---
+
+<x-main>
+    <div class="bg-slate-50 sm:px-4 my-10">
+        <table align="center">
+            <tr>
+                <td class="w-[552px] max-w-full">
+                    <table class="w-full">
+                        <tr>
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-6 mx-auto" align="center">
+                                    <img src="logo.png" width="100" alt="Boolean Dreams logo">
+                                </div>
+
+                                <h1 class="m-0 mb-6 text-xl sm:leading-8 text-gray-800 font-semibold">
+                                    An invoice has been generated for @{{CustomerName}} totaling @{{Total}}.
+                                </h1>
+
+                                <p class="m-0 leading-6">
+                                    Your approval is necessary before this invoice will be sent to the customer. Please select one of the following options to proceed:
+                                </p>
+
+                                <x-spacer height="32px"/>
+
+                                <table align="center">
+                                    <tr>
+                                        <th class="bg-green-600 hover:bg-green-600 rounded mso-padding-alt-[12px_24px] mx-4">
+                                            <a href="@{{ApprovalUrl}}" class="block py-4 px-6 text-white text-sm leading-full [text-decoration:none]">
+                                                Approve
+                                            </a>
+                                        </th>
+                                        <th class="border-2 border-red-800 hover:bg-red-800 block rounded mso-padding-alt-[12px_24px] mx-4">
+                                            <a href="@{{RejectionUrl}}" class="block py-4 px-6 text-red-800 hover:text-white text-sm leading-full [text-decoration:none]">
+                                                Reject
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <x-footer/>
+        </table>
+    </div>
+</x-main>

@@ -1,0 +1,37 @@
+---
+title: "Customer Invoice"
+bodyClass: bg-slate-50
+---
+
+<x-main>
+    <div class="bg-slate-50 sm:px-4 my-10">
+        <table align="center">
+            <tr>
+                <td class="w-[552px] max-w-full">
+                    <table class="w-full">
+                        <tr>
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-6 mx-auto" align="center">
+                                    <img src="logo.png" width="100" alt="Boolean Dreams logo">
+                                </div>
+
+                                <h1 class="m-0 mb-6 text-xl sm:leading-8 text-gray-800 font-normal">
+                                    An invoice has been attached for services rendered in @{{Month}} @{{Year}}.
+                                </h1>
+
+                                <p class="m- leading-6 font-semibold">
+                                    Please reply to this email if you have any questions.
+                                </p>
+
+                                <p class="m-0 leading-6">
+                                    Thank you for your business!
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <x-footer/>
+        </table>
+    </div>
+</x-main>

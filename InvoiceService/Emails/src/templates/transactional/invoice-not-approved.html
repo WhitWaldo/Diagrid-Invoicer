@@ -1,0 +1,33 @@
+---
+title: "Invoice Not Approved"
+bodyClass: bg-slate-50
+---
+
+<x-main>
+    <div class="bg-slate-50 sm:px-4 my-10">
+        <table align="center">
+            <tr>
+                <td class="w-[552px] max-w-full">
+                    <table class="w-full">
+                        <tr>
+                            <td class="p-12 sm:px-6 text-base text-slate-700 bg-white rounded shadow-sm">
+                                <div class="mb-6 mx-auto" align="center">
+                                    <img src="logo.png" width="100" alt="Boolean Dreams logo">
+                                </div>
+
+                                <h1 class="m-0 mb-6 text-xl sm:leading-8 text-gray-800 font-light">
+                                    An invoice has been generated for @{{CustomerName}} totaling @{{Total}}, but was not approved, either because approval timed out or it was rejected.
+                                </h1>
+
+                                <p class="m-0 leading-6 font-normal">
+                                    As a result, an invoice has <span class="font-bold underline">not</span> been automatically sent to the customer this month.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <x-footer/>
+        </table>
+    </div>
+</x-main>

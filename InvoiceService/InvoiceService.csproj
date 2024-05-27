@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Emails\**" />
+    <Content Remove="Emails\**" />
+    <EmbeddedResource Remove="Emails\**" />
+    <None Remove="Emails\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Invoicer.ServiceDefaults\Invoicer.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.1.2" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.13.1" />
+    <PackageReference Include="Dapr.Workflow" Version="1.13.1" />
+  </ItemGroup>
+
+</Project>

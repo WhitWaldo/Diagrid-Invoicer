@@ -12,7 +12,7 @@ namespace InvoiceService.Controllers;
 
 [ApiController]
 [Route("invoices")]
-public class InvoiceController(ILoggerFactory? loggerFactory, DataManagement stateMgmt, DaprWorkflowClient workflowClient) : ControllerBase
+public class InvoiceController(ILoggerFactory? loggerFactory, DaprWorkflowClient workflowClient) : ControllerBase
 {
     /// <summary>
     /// Used for logging and telemetry.

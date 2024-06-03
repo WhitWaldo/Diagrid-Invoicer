@@ -17,17 +17,19 @@ public static class Constants
     /// </summary>
     public const string PubSubName = "pubsub";
 
+
+
     /// <summary>
     /// The name of the pub/sub topic that stores the invoice data prior to being
     /// built into a file.
     /// </summary>
-    public const string QueueBuildJobsTopicName = "buildQueue";
+    public const string QueueBuildJobsTopicName = "buildqueue";
     
     /// <summary>
     /// The name of the pub/sub topic that stores the invoice numbers of the
     /// successfully built invoice files.
     /// </summary>
-    public const string FileBuiltQueueTopicName = "invoiceQueue";
+    public const string FileBuiltQueueTopicName = "invoicequeue";
 
     /// <summary>
     /// The name of the pub/sub subscription responsible for broadcasting email commands.

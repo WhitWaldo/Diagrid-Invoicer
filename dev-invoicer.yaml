@@ -9,7 +9,7 @@ apps:
     DAPR_GRPC_ENDPOINT: https://grpc-prj152614.api.cloud.diagrid.io:443
     DAPR_HTTP_ENDPOINT: https://http-prj152614.api.cloud.diagrid.io
   workDir: InvoiceService
-  command: []
+  command: ["dotnet run"]
 - appId: builder
   appPort: 5212
   env:
@@ -19,5 +19,5 @@ apps:
     DAPR_GRPC_ENDPOINT: https://grpc-prj152614.api.cloud.diagrid.io:443
     DAPR_HTTP_ENDPOINT: https://http-prj152614.api.cloud.diagrid.io
   workDir: BuilderService
-  command: []
+  command: ["dotnet run"]
 appLogDestination: ""

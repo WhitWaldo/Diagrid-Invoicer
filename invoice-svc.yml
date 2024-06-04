@@ -23,7 +23,7 @@ variables:
 pool:
   name: AzureBuildServers
   demands:
-    - has-docker -equals 1
+    - Agent.OS -equals Linux
 
 steps:
 - script: aws configure set aws_access_key_id $($env:AWS_ACCESS_KEY_ID)

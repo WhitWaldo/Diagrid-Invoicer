@@ -20,7 +20,10 @@ variables:
   - name: EcrUrl
     value: '851725333350.dkr.ecr.us-east-2.amazonaws.com/$(ServiceName)'
 
-pool: AzureBuildServers
+pool:
+  name: AzureBuildServers
+  demands:
+    - has-docker -equals 1
 
 steps:
 - script: aws configure set aws_access_key_id $($env:AWS_ACCESS_KEY_ID)

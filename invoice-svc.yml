@@ -26,7 +26,7 @@ pool:
     - Agent.OS -equals Linux
 
 steps:
-- script: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID)
+- script: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   displayName: 'Set AWS Access Key'
 - script: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   displayName: 'Set AWS Secret Access Key'

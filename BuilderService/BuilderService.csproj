@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>3f1cdeaf-b997-476f-a41f-18394d877819</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,13 +22,13 @@
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="Dapr.AspNetCore" Version="1.13.1" />
     <PackageReference Include="Dapr.Workflow" Version="1.13.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0-Preview.1" />
     <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="25.2.5" />
     <PackageReference Include="Syncfusion.DocIORenderer.Net.Core" Version="25.2.5" />
     <PackageReference Include="Syncfusion.Licensing" Version="25.2.5" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Invoicer.ServiceDefaults\Invoicer.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 

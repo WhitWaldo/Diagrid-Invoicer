@@ -1,10 +1,10 @@
 using Dapr.Workflow;
 using InvoiceService.Email;
+using InvoiceService.Extensions;
 using InvoiceService.Operations;
 using InvoiceService.Workflows;
 using InvoiceService.Workflows.Activities.SubmitInvoice;
 using Shared;
-using Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add the various environment variables prefixed with "catalyst_";

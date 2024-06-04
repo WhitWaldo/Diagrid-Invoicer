@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34825.169
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoicer.AppHost", "Invoicer.AppHost\Invoicer.AppHost.csproj", "{8C2E67A5-EF5B-453B-991B-EEAF263B98F7}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Invoicer.ServiceDefaults", "Invoicer.ServiceDefaults\Invoicer.ServiceDefaults.csproj", "{0CF9DE20-AC4F-4068-99E5-E1A0CFAF5C1D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceService", "InvoiceService\InvoiceService.csproj", "{D01FFB4E-BD2D-4C9F-BD68-5326B51A7914}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuilderService", "BuilderService\BuilderService.csproj", "{12C48F7E-C2EC-4ED2-A1BF-01882451A22B}"
@@ -25,14 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8C2E67A5-EF5B-453B-991B-EEAF263B98F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C2E67A5-EF5B-453B-991B-EEAF263B98F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C2E67A5-EF5B-453B-991B-EEAF263B98F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C2E67A5-EF5B-453B-991B-EEAF263B98F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CF9DE20-AC4F-4068-99E5-E1A0CFAF5C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CF9DE20-AC4F-4068-99E5-E1A0CFAF5C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CF9DE20-AC4F-4068-99E5-E1A0CFAF5C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CF9DE20-AC4F-4068-99E5-E1A0CFAF5C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D01FFB4E-BD2D-4C9F-BD68-5326B51A7914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D01FFB4E-BD2D-4C9F-BD68-5326B51A7914}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D01FFB4E-BD2D-4C9F-BD68-5326B51A7914}.Release|Any CPU.ActiveCfg = Release|Any CPU

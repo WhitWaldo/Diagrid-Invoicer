@@ -1,10 +1,10 @@
 using AutoMapper;
 using BuilderService;
+using BuilderService.Extensions;
 using BuilderService.Mapper;
 using BuilderService.Operations;
 using Dapr.Workflow;
 using Shared;
-using Shared.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 //Add the various environment variables prefixed with "catalyst_";
@@ -13,7 +13,7 @@ builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames
 builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
-builder.Services.AddDaprClient((c, dapr) =>
+builder.Services.AddDaprClient((c, dapr ) =>
 {
     var configuration = c.GetRequiredService<IConfiguration>();
     var httpEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprHttpEndpoint);

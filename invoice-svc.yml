@@ -38,7 +38,7 @@ steps:
   displayName: 'Create Docker Container'
 - script: docker tag $(ServiceName):latest $(EcrUrl)/$(ServiceName):latest
   displayName: 'Tag container with ECR url'
-- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin
+- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrl)
   displayName: 'Log into AWS CLI'
 - script: docker push $(EcrUrl)/$(ServiceName):latest
   displayName: 'Push container into ECR'

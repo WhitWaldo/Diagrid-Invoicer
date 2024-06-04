@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Add the various environment variables prefixed with "catalyst_";
 builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames.VariablePrefix);
 
-builder.AddServiceDefaults();
+builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
 builder.Services.AddDaprClient((c, dapr) =>
@@ -42,7 +42,7 @@ builder.Services.AddDaprWorkflow(options =>
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
+app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
 app.UseCloudEvents();

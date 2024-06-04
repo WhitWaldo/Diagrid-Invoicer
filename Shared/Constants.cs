@@ -103,12 +103,7 @@ public static class Constants
         /// The Dapr GRPC endpoint.
         /// </summary>
         public const string DaprGrpcEndpoint = "DAPR_GRPC_ENDPOINT";
-
-        /// <summary>
-        /// The Catalyst API token for the Web service.
-        /// </summary>
-        public const string DarpWebApiToken = "DAPR_WEB_API_TOKEN";
-
+        
         /// <summary>
         /// The Catalyst API token for the Builder API service.
         /// </summary>

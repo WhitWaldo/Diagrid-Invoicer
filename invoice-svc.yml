@@ -17,8 +17,10 @@ variables:
     value: 'invoice-svc'
   - name: ProjectName
     value: InvoiceService
+  - name: EcrUrlBase
+    value: 851725333350.dkr.ecr.us-east-2.amazonaws.com
   - name: EcrUrl
-    value: '851725333350.dkr.ecr.us-east-2.amazonaws.com/$(ServiceName)'
+    value: '$(EcrUrlBase)/$(ServiceName)'
 
 pool:
   name: AzureBuildServers
@@ -36,9 +38,9 @@ steps:
   displayName: 'Build Docker Image'
 - script: docker create $(ServiceName) $(ServiceName)
   displayName: 'Create Docker Container'
-- script: docker tag $(ServiceName):latest $(EcrUrl)/$(ServiceName):latest
+- script: docker tag $(ServiceName):latest $(EcrUrl):latest
   displayName: 'Tag container with ECR url'
-- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrl)
+- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrlBase)
   displayName: 'Log into AWS CLI'
-- script: docker push $(EcrUrl)/$(ServiceName):latest
+- script: docker push $(EcrUrl):latest
   displayName: 'Push container into ECR'

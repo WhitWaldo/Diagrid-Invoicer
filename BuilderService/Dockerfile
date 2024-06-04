@@ -12,8 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["BuilderService/BuilderService.csproj", "BuilderService/"]
-COPY ["../Invoicer.ServiceDefaults/Invoicer.ServiceDefaults.csproj", "Invoicer.ServiceDefaults/"]
-COPY ["../Shared/Shared.csproj", "Shared/"]
+COPY ["Shared/Shared.csproj", "Shared/"]
 RUN dotnet restore "./BuilderService/BuilderService.csproj"
 COPY . .
 WORKDIR "/src/BuilderService"

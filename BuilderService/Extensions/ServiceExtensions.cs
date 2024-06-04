@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Trace;
-using OpenTelemetry;
 using Dapr.Client;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

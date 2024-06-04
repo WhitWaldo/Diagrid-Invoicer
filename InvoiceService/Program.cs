@@ -12,7 +12,10 @@ builder.Services.AddLogging(opt =>
     opt.ClearProviders();
     opt.AddConsole();
 });
-builder.Services.AddHttpLogging();
+builder.Services.AddHttpLogging(opt =>
+{
+    opt.CombineLogs = true;
+});
 //Add the various environment variables prefixed with "catalyst_";
 builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames.VariablePrefix);
 

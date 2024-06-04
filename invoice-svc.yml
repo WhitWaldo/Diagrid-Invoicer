@@ -1,0 +1,46 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - /InvoiceService
+
+variables:
+  - name: ServiceName
+    value: 'invoice-svc'
+  - name: ProjectName
+    value: InvoiceService
+  - name: EcrUrlBase
+    value: 851725333350.dkr.ecr.us-east-2.amazonaws.com
+  - name: EcrUrl
+    value: '$(EcrUrlBase)/$(ServiceName)'
+
+pool:
+  name: AzureBuildServers
+  demands:
+    - Agent.OS -equals Linux
+
+steps:
+# - script: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+#   displayName: 'Set AWS Access Key'
+# - script: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+#   displayName: 'Set AWS Secret Access Key'
+# - script: aws configure set region $AWS_REGION
+#   displayName: 'Set AWS region'
+- script: docker build -t $(ServiceName) -f $(ProjectName)/Dockerfile .
+  displayName: 'Build Docker Image'
+- script: docker create $(ServiceName) $(ServiceName)
+  displayName: 'Create Docker Container'
+- script: docker tag $(ServiceName):latest $(EcrUrl):latest
+  displayName: 'Tag container with ECR url'
+- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrlBase)
+  displayName: 'Log into AWS CLI'
+- script: docker push $(EcrUrl):latest
+  displayName: 'Push container into ECR'

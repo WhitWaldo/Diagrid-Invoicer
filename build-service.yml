@@ -17,8 +17,10 @@ variables:
     value: 'builder-svc'
   - name: ProjectName
     value: BuilderService
+  - name: EcrUrlBase
+    value: 851725333350.dkr.ecr.us-east-2.amazonaws.com
   - name: EcrUrl
-    value: '851725333350.dkr.ecr.us-east-2.amazonaws.com/$(ServiceName)'
+    value: '$(EcrUrlBase)/$(ServiceName)'
 
 pool:
   name: AzureBuildServers
@@ -26,19 +28,19 @@ pool:
     - Agent.OS -equals Linux
 
 steps:
-# - script: aws configure set aws_access_key_id $($env:AWS_ACCESS_KEY_ID)
+# - script: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
 #   displayName: 'Set AWS Access Key'
-# - script: aws configure set aws_secret_access_key $($env:AWS_SECRET_ACCESS_KEY)
+# - script: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
 #   displayName: 'Set AWS Secret Access Key'
-# - script: aws configure set region $($env:AWS_REGION)
+# - script: aws configure set region $AWS_REGION
 #   displayName: 'Set AWS region'
 - script: docker build -t $(ServiceName) -f $(ProjectName)/Dockerfile .
   displayName: 'Build Docker Image'
 - script: docker create $(ServiceName) $(ServiceName)
   displayName: 'Create Docker Container'
-- script: docker tag $(ServiceName):latest $(EcrUrl)/$(ServiceName):latest
+- script: docker tag $(ServiceName):latest $(EcrUrl):latest
   displayName: 'Tag container with ECR url'
-- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrl)
+- script: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $(EcrUrlBase)
   displayName: 'Log into AWS CLI'
-- script: docker push $(EcrUrl)/$(ServiceName):latest
+- script: docker push $(EcrUrl):latest
   displayName: 'Push container into ECR'

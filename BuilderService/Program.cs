@@ -7,6 +7,12 @@ using Dapr.Workflow;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddLogging(opt =>
+{
+    opt.ClearProviders();
+    opt.AddConsole();
+});
+builder.Services.AddHttpLogging();
 //Add the various environment variables prefixed with "catalyst_";
 builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames.VariablePrefix);
 
@@ -45,6 +51,7 @@ var syncfusionRegistration = app.Services.GetRequiredService<SyncfusionLicenseRe
 syncfusionRegistration.RegisterLicense(Constants.EnvironmentVariableNames.SyncfusionLicenseKey);
 
 app.MapHealthChecks("/health");
+app.UseHttpLogging();
 app.UseCloudEvents();
 app.MapSubscribeHandler();
 app.UseAuthorization();

@@ -7,6 +7,12 @@ using InvoiceService.Workflows.Activities.SubmitInvoice;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddLogging(opt =>
+{
+    opt.ClearProviders();
+    opt.AddConsole();
+});
+builder.Services.AddHttpLogging();
 //Add the various environment variables prefixed with "catalyst_";
 builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames.VariablePrefix);
 
@@ -45,6 +51,7 @@ var app = builder.Build();
 app.MapHealthChecks("/health");
 
 // Configure the HTTP request pipeline.
+app.UseHttpLogging();
 app.UseCloudEvents();
 app.UseAuthorization();
 app.MapControllers();

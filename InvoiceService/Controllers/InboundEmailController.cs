@@ -1,7 +1,9 @@
-﻿using Dapr.Client;
+﻿using System.Text.Json;
+using Dapr.Client;
 using InvoiceService.Models.InboundEmail;
 using InvoiceService.Models.InboundEmail.CommandData;
 using InvoiceService.Operations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Shared;
@@ -10,7 +12,8 @@ namespace InvoiceService.Controllers;
 
 [ApiController]
 [Route("email")]
-public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataManagement stateMgmt, DaprClient client, IConfiguration configuration) : ControllerBase
+[AllowAnonymous]
+public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataManagement stateMgmt, DaprClient client) : ControllerBase
 {
     /// <summary>
     /// Used for logging and telemetry.
@@ -23,24 +26,27 @@ public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataMa
     /// </summary>
     /// <returns></returns>
     [HttpPost("receive")]
-    public async Task<IActionResult> ParseInboundEmailAsync([FromBody] ParsedEmail email)
+    public async Task<IActionResult> ParseInboundEmailAsync([FromForm] ParsedEmail parsedEmailValue)
     {
         try
         {
-            _logger.LogInformation("Received email at inbound email processing endpoint");
+            _logger.LogInformation("Received email at inbound email processing endpoint with body {body}", parsedEmailValue.ToString());
             
-            //Validate that the email is from the administrator
-            var adminEmailAddress =
-                configuration.GetValue<string>(Constants.EnvironmentVariableNames.AdminEmailAddress);
-            if (!string.Equals(email.Envelope?.From, adminEmailAddress, StringComparison.InvariantCultureIgnoreCase))
+
+            ////Validate that the email is from the administrator - Doesn't parse raw from property for some reason
+            //var adminEmailAddress =
+            //    configuration.GetValue<string>(Constants.EnvironmentVariableNames.AdminEmailAddress);
+            //if (!string.Equals(parsedEmailValue.Envelope?.From, adminEmailAddress, StringComparison.InvariantCultureIgnoreCase))
+            if (!parsedEmailValue.IsAuthenticated)
             {
-                _logger.LogInformation(
-                    "As the email was sent from {emailFromAddress} and not the administrator email {adminEmailAddress}, the message is being ignored",
-                    email.Envelope?.From ?? "", adminEmailAddress);
+                _logger.LogInformation("The email did not pass authentication as it did not contain the required code value");
+                //_logger.LogInformation(
+                //    "As the email was sent from {emailFromAddress} and not the administrator email {adminEmailAddress}, the message is being ignored",
+                //    parsedEmailValue.Envelope?.From ?? "", adminEmailAddress);
                 return new StatusCodeResult(401);
             }
 
-            var parsedEmailCommandPayload = email.ParsePayload();
+            var parsedEmailCommandPayload = parsedEmailValue.ParsePayload();
             if (parsedEmailCommandPayload is null)
             {
                 _logger.LogError("Parsing of the email payload failed with unknown reason");

@@ -1,4 +1,5 @@
 ﻿using Dapr.Workflow;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Shared;
@@ -7,6 +8,7 @@ namespace InvoiceService.Controllers;
 
 [ApiController]
 [Route("pending")]
+[AllowAnonymous]
 public class ApprovalController(ILoggerFactory? loggerFactory, DaprWorkflowClient daprWorkflowClient) : ControllerBase
 {
     /// <summary>

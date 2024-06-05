@@ -30,20 +30,20 @@ public sealed record ParsedEmail
     /// <summary>
     /// The SPF record evaluation.
     /// </summary>
-    [JsonPropertyName("spf")]
+    [JsonPropertyName("SPF")]
     public string? SPF { get; init; }
 
     /// <summary>
     /// The raw to field.
     /// </summary>
     [JsonPropertyName("to")]
-    public string? ToRaw { get; init; }
+    public string ToRaw { get; init; } = string.Empty;
 
     /// <summary>
     /// The raw from field.
     /// </summary>
     [JsonPropertyName("from")]
-    public string? FromRaw { get; init; }
+    public string FromRaw { get; init; } = string.Empty;
 
     /// <summary>
     /// The number of attachments included on the email.
@@ -63,6 +63,10 @@ public sealed record ParsedEmail
     [JsonPropertyName("charsets")]
     public Dictionary<string, string> Charsets { get; init; } = [];
 
+    //public Dictionary<string, string> ParsedHeaders => Headers.Split(";\r\n", StringSplitOptions.RemoveEmptyEntries)
+    //    .Select(line => line.Split('='))
+    //    .ToDictionary(parts => parts[0].Trim(), parts => parts[1].Trim());
+    
     /// <summary>
     /// The IP address of the sender.
     /// </summary>
@@ -81,6 +85,8 @@ public sealed record ParsedEmail
     [JsonIgnore]
     public bool PassedSpf => string.Equals(SPF, "pass");
 
+    [JsonIgnore] public bool IsAuthenticated => Text?.Contains("Code=oih31ojh32kjb2389y3r29832hsdbllhjkds;") ?? false; 
+    
     /// <summary>
     /// Parses the payload of the email message and indicates the command contained within, if any.
     /// </summary>
@@ -90,7 +96,6 @@ public sealed record ParsedEmail
         if (string.IsNullOrWhiteSpace(Html) || string.IsNullOrWhiteSpace(Subject))
             return null;
         
-
         return Subject?.ToLowerInvariant() switch
         {
             "add line item" => ParseAddLineItemCommand(),

@@ -2,6 +2,7 @@
 using Dapr.Workflow;
 using InvoiceService.Utilities;
 using InvoiceService.Workflows;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Shared;
@@ -11,6 +12,7 @@ namespace InvoiceService.Controllers;
 
 [ApiController]
 [Route("invoices")]
+[AllowAnonymous]
 public class InvoiceController(ILoggerFactory? loggerFactory, DaprWorkflowClient workflowClient) : ControllerBase
 {
     /// <summary>

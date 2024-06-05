@@ -84,7 +84,7 @@ code and a table with the following content. Note that the headers need to be pr
 Only column order and the data type matters:
 
 | Column Name | Data Type | Description | Example |
-| -- | -- | -- |
+| -- | -- | -- | -- |
 | Customer Id | Guid | In a production app, we'd store customer data in a database and look it up, but here we just have a lookup table with two customers. | e4cd5381-e822-4f1b-a991-4e78b4bfb717 |
 | Quantity | String | Contains the quantity - this might be a number like "3" or include some unit of measure like "9 hours"; it's not parsed. | 10 hours |
 | Description | String | A value providing a description for the work done being written on the line item. | Web Development |
@@ -130,9 +130,9 @@ Put simply, this won't work fully without having an account with the following s
 | -- | -- | -- |
 | [SendGrid](https://www.sendgrid.com) | Used to both send and receive/parse emails | I believe there's a free tier offered, but you'd have to check with them |
 | Domain | You'll need a domain to receive the inbound mail from SendGrid | The domain needs to be configured in SendGrid and in the environment variables so the approval/rejection links go back to the service. You'll also need to set up MX records to make it work with SendGrid |
-| [Syncfusion File Formats](https://www.syncfusion.com/document-processing-libraries) | | Handles document insertion and PDF conversion | This will work without a license key, but will place watermarks on the PDF |
-| Diagrid Catalyst Account | If you don't have access to Catalyst, the whole solution is compatible with a fully-featured Dapr instance, but you'll need to set up the various component files to configure all the bindings |
-| Azure Storage account | I use Azure Storage as the blob store for this solution as the file is too large to put in a pub/sub event, but you can use whatever Dapr-compatible store you want |
+| [Syncfusion File Formats](https://www.syncfusion.com/document-processing-libraries) | Handles document insertion and PDF conversion | This will work without a license key, but will place watermarks on the PDF |
+| Diagrid Catalyst Account | Abstracted Dapr sidecar-as-a-service - interfaces with Diagrid services and third-party APIs | If you don't have access to Catalyst, the whole solution is compatible with a fully-featured Dapr instance, but you'll need to set up the various component files to configure all the bindings |
+| Azure Storage account | Blob storage | I use Azure Storage as the blob store for this solution as the file is too large to put in a pub/sub event, but you can use whatever Dapr-compatible store you want |
 
 There are a collection of environment variables you'll need to set for either service. Primarily, these allow the application to be configured without putting a bunch of confidential values into the source code. Note
 that all the environment variable names need to be prefixed with the value "catalyst_" or they'll be overlooked during initialization. I exclude the prefix below, but make sure it's there for your setup.

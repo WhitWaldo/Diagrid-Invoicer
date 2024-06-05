@@ -90,6 +90,11 @@ public static class Constants
         public const string CustomerEmailAddress = "CUSTOMER_EMAIL_ADDRESS";
 
         /// <summary>
+        /// The validation code required to be present in emails for "authentication".
+        /// </summary>
+        public const string EmailValidationCode = "EMAIL_VALIDATION_CODE";
+
+        /// <summary>
         /// The name to associate with the "From" email address.
         /// </summary>
         public const string FromEmailName = "FROM_EMAIL_NAME";

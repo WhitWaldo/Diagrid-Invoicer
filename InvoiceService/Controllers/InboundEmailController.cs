@@ -13,7 +13,7 @@ namespace InvoiceService.Controllers;
 [ApiController]
 [Route("email")]
 [AllowAnonymous]
-public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataManagement stateMgmt, DaprClient client) : ControllerBase
+public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataManagement stateMgmt, DaprClient client, IConfiguration configuration) : ControllerBase
 {
     /// <summary>
     /// Used for logging and telemetry.
@@ -32,12 +32,13 @@ public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataMa
         {
             _logger.LogInformation("Received email at inbound email processing endpoint with body {body}", parsedEmailValue.ToString());
             
-
             ////Validate that the email is from the administrator - Doesn't parse raw from property for some reason
             //var adminEmailAddress =
             //    configuration.GetValue<string>(Constants.EnvironmentVariableNames.AdminEmailAddress);
             //if (!string.Equals(parsedEmailValue.Envelope?.From, adminEmailAddress, StringComparison.InvariantCultureIgnoreCase))
-            if (!parsedEmailValue.IsAuthenticated)
+            var emailValidationCode =
+                configuration.GetValue<string>(Constants.EnvironmentVariableNames.EmailValidationCode)!;
+            if (!parsedEmailValue.IsAuthenticated(emailValidationCode))
             {
                 _logger.LogInformation("The email did not pass authentication as it did not contain the required code value");
                 //_logger.LogInformation(

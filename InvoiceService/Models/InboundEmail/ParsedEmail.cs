@@ -85,7 +85,12 @@ public sealed record ParsedEmail
     [JsonIgnore]
     public bool PassedSpf => string.Equals(SPF, "pass");
 
-    [JsonIgnore] public bool IsAuthenticated => Text?.Contains("Code=oih31ojh32kjb2389y3r29832hsdbllhjkds;") ?? false; 
+    /// <summary>
+    /// Performs simple validation to prevent users from sending malicious emails into the system.
+    /// </summary>
+    /// <param name="validationCode">The validation code required for "authentication".</param>
+    /// <returns></returns>
+    public bool IsAuthenticated(string validationCode) => Text?.Contains($"Code={validationCode};") ?? false; 
     
     /// <summary>
     /// Parses the payload of the email message and indicates the command contained within, if any.

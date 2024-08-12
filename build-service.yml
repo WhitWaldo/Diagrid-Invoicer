@@ -13,7 +13,7 @@ variables:
   - name: ProjectName
     value: BuilderService
   - name: EcrUrlBase
-    value: 851725333350.dkr.ecr.us-east-2.amazonaws.com # Retrieve from ECR instance > View Push Commands
+    value: 211125601863.dkr.ecr.us-east-2.amazonaws.com # Retrieve from ECR instance > View Push Commands
   - name: EcrUrl
     value: '$(EcrUrlBase)/$(ServiceName)'
 

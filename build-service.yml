@@ -24,6 +24,7 @@ pool:
 
 steps:
 # Set the aws_access_key_id and aws_secret_access_key from IAM user console CLI wizard in ~/.aws/credentials on build server
+# The user who the access key represents must have the AmazonEC2ContainreRegistryPowerUser permission policy at a minimum (AmazonEc2ContainerRegistryFullAccess preferred)
 - script: docker build -t $(ServiceName) -f $(ProjectName)/Dockerfile .
   displayName: 'Build Docker Image'
 - script: docker create $(ServiceName) $(ServiceName)

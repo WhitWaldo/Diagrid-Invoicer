@@ -1,11 +1,9 @@
-using System.Runtime.InteropServices.JavaScript;
 using Dapr.Workflow;
 using InvoiceService.Email;
 using InvoiceService.Extensions;
 using InvoiceService.Operations;
 using InvoiceService.Workflows;
 using InvoiceService.Workflows.Activities.SubmitInvoice;
-using Microsoft.AspNetCore.Mvc;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);

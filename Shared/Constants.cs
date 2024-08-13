@@ -23,13 +23,13 @@ public static class Constants
     /// The name of the pub/sub topic that stores the invoice data prior to being
     /// built into a file.
     /// </summary>
-    public const string QueueBuildJobsTopicName = "buildqueue";
+    public const string QueueBuildPubSubName = "buildqueue";
     
     /// <summary>
     /// The name of the pub/sub topic that stores the invoice numbers of the
     /// successfully built invoice files.
     /// </summary>
-    public const string FileBuiltQueueTopicName = "invoicequeue";
+    public const string FileBuiltPubSubName = "invoicequeue";
 
     /// <summary>
     /// The name of the pub/sub subscription responsible for broadcasting email commands.
@@ -55,7 +55,7 @@ public static class Constants
     /// The name of the dead-letter queue for the Generate Invoice topic.
     /// </summary>
     public const string GenerateInvoiceDeadletterTopicName = "generate-invoice-deadletter";
-    
+
     /// <summary>
     /// The name of the SendGrid binding.
     /// </summary>

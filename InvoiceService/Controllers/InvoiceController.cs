@@ -26,7 +26,7 @@ public class InvoiceController(ILoggerFactory? loggerFactory, DaprWorkflowClient
     /// </summary>
     /// <param name="invoiceDetails"></param>
     /// <returns></returns>
-    [Topic(Constants.PubSubName, Constants.FileBuiltQueueTopicName)]
+    [Topic(Constants.PubSubName, Constants.FileBuiltPubSubName)]
     [HttpPost("built")]
     public async Task<IActionResult> ProcessBuiltInvoiceAsync(BuiltInvoice invoiceDetails)
     {

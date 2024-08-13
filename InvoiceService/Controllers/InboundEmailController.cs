@@ -74,7 +74,7 @@ public sealed class InboundEmailController(ILoggerFactory? loggerFactory, DataMa
                     {
                         var invoice = await stateMgmt.PrepareInvoicesAsync(customerId);
                         _logger.LogInformation("Created invoice data for customer {customerId} - publishing to pubsub", customerId);
-                        await client.PublishEventAsync(Constants.PubSubName, Constants.QueueBuildJobsTopicName, invoice);
+                        await client.PublishEventAsync(Constants.PubSubName, Constants.GenerateInvoiceTopicName, invoice);
                         _logger.LogInformation("Published invoice data for {customerId} to pubsub", customerId);
                     }
 

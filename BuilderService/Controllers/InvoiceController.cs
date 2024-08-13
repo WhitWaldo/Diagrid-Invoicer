@@ -24,7 +24,7 @@ public class InvoiceController(ILoggerFactory? loggerFactory, DaprClient dapr, I
     /// Subscribes to a messaging service and builds the invoice given the customer and line item data.
     /// </summary>
     /// <returns></returns>
-    [Topic(Constants.PubSubName, Constants.QueueBuildJobsTopicName)]
+    [Topic(Constants.PubSubName, Constants.GenerateInvoiceTopicName)]
     [HttpPost("build")]
     public async Task<IActionResult> BuildCustomerInvoiceAsync(Invoice invoice)
     {
@@ -46,7 +46,7 @@ public class InvoiceController(ILoggerFactory? loggerFactory, DaprClient dapr, I
             _logger.LogInformation("Successfully persisted PDF bytes to blob state for {invoiceNumber}", invoice.InvoiceNumber);
 
             //Publish message indicating that the invoice generation is completed
-            await dapr.PublishEventAsync(Constants.PubSubName, Constants.FileBuiltQueueTopicName,
+            await dapr.PublishEventAsync(Constants.PubSubName, Constants.FileBuiltPubSubName,
                 new BuiltInvoice(invoice.InvoiceNumber, invoice.CustomerName, invoice.InvoiceDate, invoice.Total,
                     invoice.CustomerId));
             _logger.LogInformation("Successfully published invoice generation completion event to message queue for {invoiceNumber}", invoice.InvoiceNumber);

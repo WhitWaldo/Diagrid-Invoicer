@@ -45,6 +45,7 @@ builder.Services.AddDaprWorkflowClient();
 builder.Services.AddDaprWorkflow(options =>
 {
     options.RegisterWorkflow<SubmitInvoiceWorkflow>();
+    options.RegisterActivity<GetCustomerEmailAddressActivity>();
     options.RegisterActivity<EmailApprovalToAdminActivity>();
     options.RegisterActivity<EmailCustomerWithInvoiceActivity>();
     options.RegisterActivity<EmailAdminWithRejectionNoticeActivity>();

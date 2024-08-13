@@ -51,7 +51,7 @@ builder.Services.AddDaprWorkflowClient();
 
 var app = builder.Build();
 var syncfusionRegistration = app.Services.GetRequiredService<SyncfusionLicenseRegistration>();
-syncfusionRegistration.RegisterLicense(Constants.EnvironmentVariableNames.SyncfusionLicenseKey);
+syncfusionRegistration.RegisterLicense(Constants.EnvironmentVariableNames.SyncfusionLicenseKey); 
 
 app.MapHealthChecks("/health");
 app.UseHttpLogging();

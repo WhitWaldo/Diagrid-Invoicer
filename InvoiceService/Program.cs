@@ -51,7 +51,7 @@ builder.Services.AddDaprWorkflow(options =>
     options.RegisterActivity<EmailApprovalToAdminActivity>();
     options.RegisterActivity<EmailCustomerWithInvoiceActivity>();
     options.RegisterActivity<EmailAdminWithRejectionNoticeActivity>();
-});
+}); 
 
 var app = builder.Build();
 

@@ -43,6 +43,7 @@ steps:
 - script: docker push $(EcrUrl):latest
   displayName: 'Push container into ECR'
 - task: Docker@2
+  displayName: 'Push container into ACR'
   inputs:
     containerRegistry: 'Azure Container Registry'
     repository: 'invoice-svc'

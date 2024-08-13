@@ -16,6 +16,8 @@ variables:
     value: 211125601863.dkr.ecr.us-east-2.amazonaws.com # Retrieve from ECR instance > View Push Commands
   - name: EcrUrl
     value: '$(EcrUrlBase)/$(ServiceName)'
+  - name: containerTag
+    value: $(Build.SourceVersion)-$(Build.BuildId)
 
 pool:
   name: AzureBuildServers
@@ -35,3 +37,14 @@ steps:
   displayName: 'Log into AWS CLI'
 - script: docker push $(EcrUrl):latest
   displayName: 'Push container into ECR'
+- task: Docker@2
+  displayName: 'Push container into ACR'
+  inputs:
+    containerRegistry: 'Azure Container Registry'
+    repository: 'builder-svc'
+    command: 'buildAndPush'
+    Dockerfile: '$(ProjectName)/Dockerfile'
+    buildContext: '$(Build.SourcesDirectory)'
+    tags: |
+      latest
+      $(containerTag)

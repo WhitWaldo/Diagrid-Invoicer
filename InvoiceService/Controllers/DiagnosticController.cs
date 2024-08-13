@@ -41,10 +41,10 @@ public sealed class DiagnosticController(ILoggerFactory? loggerFactory, IConfigu
         sb.AppendLine($"GrpcEndpoint: {grpcEndpoint}");
 
         var invoiceApiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprInvoiceApiToken);
-        sb.AppendLine($"InvoiceApiToken: {invoiceApiToken?.Substring(0, 10)}");
+        sb.AppendLine($"InvoiceApiToken: {invoiceApiToken?[..16]}");
 
         var builderApiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprBuilderApiToken);
-        sb.AppendLine($"BuilderApiToken: {builderApiToken?.Substring(0, 10)}");
+        sb.AppendLine($"BuilderApiToken: {builderApiToken?[..16]}");
 
         var adminEmailAddress = configuration.GetValue<string>(Constants.EnvironmentVariableNames.AdminEmailAddress);
         sb.AppendLine($"AdminEmailAddress: {adminEmailAddress}");
@@ -56,7 +56,7 @@ public sealed class DiagnosticController(ILoggerFactory? loggerFactory, IConfigu
             configuration.GetValue<string>(Constants.EnvironmentVariableNames.CustomerEmailAddress);
         sb.AppendLine($"CustomerEmailAddress: {customerEmailAddress}");
         
-        sb.AppendLine($"EmailValidationCode: {emailValidationCode?.Substring(0, 4)}");
+        sb.AppendLine($"EmailValidationCode: {emailValidationCode?[..4]}");
 
         var fromEmailName = configuration.GetValue<string>(Constants.EnvironmentVariableNames.FromEmailName);
         sb.AppendLine($"FromEmailName: {fromEmailName}");

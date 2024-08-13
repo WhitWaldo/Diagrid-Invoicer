@@ -23,12 +23,12 @@ builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames
 builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
+
 builder.Services.AddDaprClient((c, dapr) =>
 {
-    var configuration = c.GetRequiredService<IConfiguration>();
-    var httpEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprHttpEndpoint);
-    var grpcEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprGrpcEndpoint);
-    var apiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprInvoiceApiToken);
+    var httpEndpoint = Environment.GetEnvironmentVariable(Constants.EnvironmentVariableNames.DaprHttpEndpoint);
+    var grpcEndpoint = Environment.GetEnvironmentVariable(Constants.EnvironmentVariableNames.DaprGrpcEndpoint);
+    var apiToken = Environment.GetEnvironmentVariable(Constants.EnvironmentVariableNames.DaprInvoiceApiToken);
 
     dapr.UseHttpEndpoint(httpEndpoint);
     dapr.UseGrpcEndpoint(grpcEndpoint);

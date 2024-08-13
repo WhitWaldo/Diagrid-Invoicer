@@ -27,16 +27,10 @@ builder.Services.AddControllers();
 builder.Services.AddDaprClient((c, dapr) =>
 {
     var configuration = c.GetRequiredService<IConfiguration>();
-    var logger = c.GetRequiredService<ILogger>();
 
     var httpEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprHttpEndpoint);
-    logger.LogInformation("HttpEndpoint: {httpEndpoint}", httpEndpoint);
-    
     var grpcEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprGrpcEndpoint);
-    logger.LogInformation("GrpcEndpoint: {grpcEndpoint}", grpcEndpoint);
-    
     var apiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprInvoiceApiToken);
-    logger.LogInformation("ApiToken: {apiToken}", apiToken?[..5]);
 
     dapr.UseHttpEndpoint(httpEndpoint);
     dapr.UseGrpcEndpoint(grpcEndpoint);

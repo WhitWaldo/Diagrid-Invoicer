@@ -1,4 +1,5 @@
-﻿using Dapr.Workflow;
+﻿using Dapr.Client;
+using Dapr.Workflow;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -16,7 +17,7 @@ public class ApprovalController(ILoggerFactory? loggerFactory, DaprWorkflowClien
     /// </summary>
     private readonly ILogger _logger = loggerFactory?.CreateLogger<ApprovalController>() ??
                                        NullLoggerFactory.Instance.CreateLogger<ApprovalController>();
-
+    
     /// <summary>
     /// Endpoint is invoked to accept a given invoice.
     /// </summary>
@@ -30,6 +31,8 @@ public class ApprovalController(ILoggerFactory? loggerFactory, DaprWorkflowClien
 
             //Note that the approval ID is also the instance ID for finding the workflow to submit to
             await daprWorkflowClient.RaiseEventAsync(approvalId, Constants.InvoiceApprovalResponseEventName, true);
+
+            _logger.LogInformation("Successfully raised event {workflowEventName} for approval ID {approvalId} in approving the invoice", Constants.InvoiceApprovalResponseEventName, approvalId);
 
             return new OkResult();
         }
@@ -53,6 +56,8 @@ public class ApprovalController(ILoggerFactory? loggerFactory, DaprWorkflowClien
 
             //Note that the approval ID is also the instance ID for finding the workflow to submit to
             await daprWorkflowClient.RaiseEventAsync(approvalId, Constants.InvoiceApprovalResponseEventName, false);
+
+            _logger.LogInformation("Successfully raised event {workflowEventName} for approval ID {approvalId} in rejecting the invoice", Constants.InvoiceApprovalResponseEventName, approvalId);
 
             return new OkResult();
         }

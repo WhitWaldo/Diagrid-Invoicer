@@ -37,8 +37,14 @@ public class InvoiceController(ILoggerFactory? loggerFactory, DaprWorkflowClient
             //Generate an approval ID
             var approvalId = await WorkflowValueBuilder.CreateApprovalIdAsync(invoiceDetails.InvoiceNumber);
             
+            _logger.LogInformation("Generated an approval ID {workflowId} for the built invoice", approvalId);
+
             //Schedule the workflow to start immediately using the approval ID as the instance identifier
             await workflowClient.ScheduleNewWorkflowAsync(nameof(SubmitInvoiceWorkflow), approvalId, invoiceDetails);
+
+            _logger.LogInformation(
+                "Scheduling the workflow for {workflowId} for customer ID {customerId} and customer name {customerName}",
+                approvalId, invoiceDetails.CustomerId, invoiceDetails.CustomerName);
 
             return new OkResult();
         }

@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /.diagrid
 /InvoiceService/.diagrid
+/InvoiceService/dev-invoicer.yaml

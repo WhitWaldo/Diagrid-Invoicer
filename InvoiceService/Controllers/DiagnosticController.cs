@@ -35,38 +35,38 @@ public sealed class DiagnosticController(ILoggerFactory? loggerFactory, IConfigu
         
         //Get the values out of the configuration
         var httpEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprHttpEndpoint);
-        sb.AppendLine($"HttpEndpoint: {httpEndpoint}<br/>");
+        sb.AppendLine($"HttpEndpoint: {httpEndpoint}");
 
         var grpcEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprGrpcEndpoint);
-        sb.AppendLine($"GrpcEndpoint: {grpcEndpoint}<br/>");
+        sb.AppendLine($"GrpcEndpoint: {grpcEndpoint}");
 
         var invoiceApiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprInvoiceApiToken);
-        sb.AppendLine($"InvoiceApiToken: {invoiceApiToken}<br/>");
+        sb.AppendLine($"InvoiceApiToken: {invoiceApiToken?.Substring(0, 10)}");
 
         var builderApiToken = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprBuilderApiToken);
-        sb.AppendLine($"BuilderApiToken: {builderApiToken}<br/>");
+        sb.AppendLine($"BuilderApiToken: {builderApiToken?.Substring(0, 10)}");
 
         var adminEmailAddress = configuration.GetValue<string>(Constants.EnvironmentVariableNames.AdminEmailAddress);
-        sb.AppendLine($"AdminEmailAddress: {adminEmailAddress}<br/>");
+        sb.AppendLine($"AdminEmailAddress: {adminEmailAddress}");
 
         var fromEmailAddress = configuration.GetValue<string>(Constants.EnvironmentVariableNames.FromEmailAddress);
-        sb.AppendLine($"FromEmailAddress: {fromEmailAddress}<br/>");
+        sb.AppendLine($"FromEmailAddress: {fromEmailAddress}");
 
         var customerEmailAddress =
             configuration.GetValue<string>(Constants.EnvironmentVariableNames.CustomerEmailAddress);
-        sb.AppendLine($"CustomerEmailAddress: {customerEmailAddress}<br/>");
+        sb.AppendLine($"CustomerEmailAddress: {customerEmailAddress}");
         
-        sb.AppendLine($"EmailValidationCode: {emailValidationCode?[..4]}<br/>");
+        sb.AppendLine($"EmailValidationCode: {emailValidationCode?.Substring(0, 4)}");
 
         var fromEmailName = configuration.GetValue<string>(Constants.EnvironmentVariableNames.FromEmailName);
-        sb.AppendLine($"FromEmailName: {fromEmailName}<br/>");
+        sb.AppendLine($"FromEmailName: {fromEmailName}");
 
         var syncfusionLicenseKey =
             configuration.GetValue<string>(Constants.EnvironmentVariableNames.SyncfusionLicenseKey)?[..4];
         sb.AppendLine($"SyncfusionLicenseKey: {syncfusionLicenseKey}");
 
         var apiBaseDomain = configuration.GetValue<string>(Constants.EnvironmentVariableNames.ApiBaseDomain);
-        sb.AppendLine($"ApiBaseDomain: {apiBaseDomain}<br/>");
+        sb.AppendLine($"ApiBaseDomain: {apiBaseDomain}");
 
         return new OkObjectResult(sb.ToString());
     }

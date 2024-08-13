@@ -13,7 +13,7 @@ variables:
   - name: ProjectName
     value: BuilderService
   - name: EcrUrlBase
-    value: 851725333350.dkr.ecr.us-east-2.amazonaws.com
+    value: 211125601863.dkr.ecr.us-east-2.amazonaws.com # Retrieve from ECR instance > View Push Commands
   - name: EcrUrl
     value: '$(EcrUrlBase)/$(ServiceName)'
 
@@ -23,12 +23,8 @@ pool:
     - Agent.OS -equals Linux
 
 steps:
-# - script: aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-#   displayName: 'Set AWS Access Key'
-# - script: aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-#   displayName: 'Set AWS Secret Access Key'
-# - script: aws configure set region $AWS_REGION
-#   displayName: 'Set AWS region'
+# Set the aws_access_key_id and aws_secret_access_key from IAM user console CLI wizard in ~/.aws/credentials on build server
+# The user who the access key represents must have the AmazonEC2ContainreRegistryPowerUser permission policy at a minimum (AmazonEc2ContainerRegistryFullAccess preferred)
 - script: docker build -t $(ServiceName) -f $(ProjectName)/Dockerfile .
   displayName: 'Build Docker Image'
 - script: docker create $(ServiceName) $(ServiceName)

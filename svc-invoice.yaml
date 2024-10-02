@@ -21,7 +21,7 @@ variables:
 - name: azureContainerRegistryName
   value: innovian
 - name: version
-  value: $(date:yyyy.MM.dd)$(rev:.r)
+  value: $(date:yyyyMMdd)$(rev:r)
 
 stages:
 - stage: Build

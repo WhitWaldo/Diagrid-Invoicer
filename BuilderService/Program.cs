@@ -1,9 +1,7 @@
 using AutoMapper;
 using BuilderService;
-using BuilderService.Extensions;
 using BuilderService.Mapper;
 using BuilderService.Operations;
-using Dapr.Workflow;
 using Shared;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +20,8 @@ builder.Configuration.AddEnvironmentVariables(Constants.EnvironmentVariableNames
 builder.Services.AddHealthChecks();
 
 builder.Services.AddControllers();
-builder.Services.AddDaprClient((c, dapr ) =>
+
+builder.Services.AddDaprClient((c, dapr) =>
 {
     var configuration = c.GetRequiredService<IConfiguration>();
     var httpEndpoint = configuration.GetValue<string>(Constants.EnvironmentVariableNames.DaprHttpEndpoint);
@@ -44,10 +43,6 @@ builder.Services.AddSingleton(_ =>
     return configuration;
 });
 builder.Services.AddSingleton<InvoiceGenerator>();
-
-builder.Services.AddDaprWorkflowClient();
-
-//builder.Services.AddDaprWorkflow();
 
 var app = builder.Build();
 var syncfusionRegistration = app.Services.GetRequiredService<SyncfusionLicenseRegistration>();

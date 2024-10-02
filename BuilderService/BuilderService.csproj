@@ -20,12 +20,11 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
-    <PackageReference Include="Dapr.AspNetCore" Version="1.13.1" />
-    <PackageReference Include="Dapr.Workflow" Version="1.13.1" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.14.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
-    <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="26.2.8" />
-    <PackageReference Include="Syncfusion.DocIORenderer.Net.Core" Version="26.2.8" />
-    <PackageReference Include="Syncfusion.Licensing" Version="26.2.9" />
+    <PackageReference Include="Syncfusion.DocIO.Net.Core" Version="27.1.51" />
+    <PackageReference Include="Syncfusion.DocIORenderer.Net.Core" Version="27.1.51" />
+    <PackageReference Include="Syncfusion.Licensing" Version="27.1.51" />
   </ItemGroup>
 
   <ItemGroup>

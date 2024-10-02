@@ -1,6 +1,5 @@
 using Dapr.Workflow;
 using InvoiceService.Email;
-using InvoiceService.Extensions;
 using InvoiceService.Operations;
 using InvoiceService.Workflows;
 using InvoiceService.Workflows.Activities.SubmitInvoice;

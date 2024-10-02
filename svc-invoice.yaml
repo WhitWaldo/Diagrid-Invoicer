@@ -20,6 +20,8 @@ variables:
   value: InvoiceService
 - name: azureContainerRegistryName
   value: innovian
+- name: version
+  value: $(date:yyyy.MM.dd)$(rev:.r)
 
 stages:
 - stage: Build
@@ -55,4 +57,4 @@ stages:
         command: 'push'
         tags: |
           latest
-          $(Build.SourceVersion)-$(Build.BuildId)
+          $(version)

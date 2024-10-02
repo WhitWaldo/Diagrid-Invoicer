@@ -20,6 +20,8 @@ variables:
   value: BuilderService
 - name: azureContainerRegistryName
   value: innovian
+- name: version
+  value: $(date:yyyy.MM.dd)$(rev:.r)
 
 stages:
 - stage: Build
@@ -46,7 +48,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)
         tags: |
           latest
-          $(Build.SourceVersion)-$(Build.BuildId)
+          $(version)
     - task: Docker@2
       displayName: 'publish Docker image to Empirica ACR'
       inputs:
@@ -55,4 +57,4 @@ stages:
         command: 'push'
         tags: |
           latest
-          $(Build.SourceVersion)-$(Build.BuildId)
+          $(version)

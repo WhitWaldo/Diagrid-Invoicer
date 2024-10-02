@@ -1,0 +1,58 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - main
+
+resources:
+- repo: self
+
+variables:
+- name: dotnetVersion
+  value: '8.x'
+- name: imageRepository
+  value: 'catalysthackathon/builder-svc'
+- name: dockerfilePath
+  value: '$(Build.SourcesDirectory)/BuilderService/Dockerfile'
+- name: containerTag
+  value: '$(Build.SourcesDirectory)-$(Build.BuildId)'
+- name: projectName
+  value: BuilderService
+- name: azureContainerRegistryName
+  value: innovian
+
+stages:
+- stage: Build
+  displayName: Build and push to ACR
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      name: AzureBuildServers
+      demands: Agent.OS -equals Linux
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '$(dotnetVersion)'
+    - task: Docker@2
+      displayName: 'build docker image'
+      inputs:
+        command: 'build'
+        containerRegistry: 'innovian'
+        repository: $(imageRepository)
+        Dockerfile: $(dockerfilePath)
+        buildContext: $(Build.SourcesDirectory)
+        tags: |
+          latest
+          $(Build.SourceVersion)-$(Build.BuildId)
+    - task: Docker@2
+      displayName: 'publish Docker image to Empirica ACR'
+      inputs:
+        containerRegistry: 'innovian'
+        repository: $(imageRepository)
+        command: 'push'
+        tags: |
+          latest
+          $(Build.SourceVersion)-$(Build.BuildId)

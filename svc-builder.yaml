@@ -40,7 +40,7 @@ stages:
       displayName: 'build docker image'
       inputs:
         command: 'build'
-        containerRegistry: 'innovian container registry'
+        containerRegistry: 'innovian'
         repository: $(imageRepository)
         Dockerfile: $(dockerfilePath)
         buildContext: $(Build.SourcesDirectory)
@@ -50,7 +50,7 @@ stages:
     - task: Docker@2
       displayName: 'publish Docker image to Empirica ACR'
       inputs:
-        containerRegistry: 'innovian container registry'
+        containerRegistry: 'innovian'
         repository: $(imageRepository)
         command: 'push'
         tags: |

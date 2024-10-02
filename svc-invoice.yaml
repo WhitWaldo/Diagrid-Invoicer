@@ -48,7 +48,7 @@ stages:
         buildContext: $(Build.SourcesDirectory)
         tags: |
           latest
-          $(Build.SourceVersion)-$(Build.BuildId)
+          $(version)
     - task: Docker@2
       displayName: 'publish Docker image to Empirica ACR'
       inputs:
